@@ -1,0 +1,1388 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "A list of all APIs",
+        "version": "1.0",
+        "title": "Relocation API"
+    },
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "About the Service"
+        },
+        {
+            "name": "Onboarding Plans"
+        },
+        {
+            "name": "Onboarding Deployments"
+        },
+        {
+            "name": "Onboarding Resources"
+        },
+        {
+            "name": "Onboarding Blueprints"
+        },
+        {
+            "name": "Onboarding Plan Execution"
+        },
+        {
+            "name": "Query for Discovered Machines"
+        },
+        {
+            "name": "Unregister Machines"
+        }
+    ],
+    "schemes": [],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "security": [
+        {
+            "apiKey": []
+        }
+    ],
+    "paths": {
+        "/relocation/about": {
+            "get": {
+                "description": "Provides basic information about the running Relocation service instance.",
+                "tags": [
+                    "About the Service"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/AboutResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/relocation/onboarding/plan": {
+            "get": {
+                "tags": [
+                    "Onboarding Plans"
+                ],
+                "description": "Queries for onboarding plans.",
+                "parameters": [
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand document contents",
+                        "required": false,
+                        "type": "boolean",
+                        "default": false
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "OData filter expression",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Comma-separated list of fields to populate in query result",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$limit",
+                        "in": "query",
+                        "description": "Set maximum number of documents to return in this query",
+                        "required": false,
+                        "type": "integer",
+                        "x-example": 10
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceDocumentQueryResult"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Onboarding Plans"
+                ],
+                "description": "Creates an onboarding plan.",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/OnboardingPlanRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/OnboardingPlanResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/relocation/onboarding/plan/{id}": {
+            "get": {
+                "tags": [
+                    "Onboarding Plans"
+                ],
+                "description": "Gets the selected onboarding plan.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/OnboardingPlanResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Onboarding Plans"
+                ],
+                "description": "Deletes the selected onboarding plan.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceErrorResponse"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Onboarding Plans"
+                ],
+                "description": "Updates the selected onboarding plan.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceErrorResponse"
+                        }
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        },
+        "/relocation/onboarding/deployment": {
+            "get": {
+                "tags": [
+                    "Onboarding Deployments"
+                ],
+                "description": "Queries for onboarding deployments.",
+                "parameters": [
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand document contents",
+                        "required": false,
+                        "type": "boolean",
+                        "default": false
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "OData filter expression",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Comma-separated list of fields to populate in query result",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$limit",
+                        "in": "query",
+                        "description": "Set maximum number of documents to return in this query",
+                        "required": false,
+                        "type": "integer",
+                        "x-example": 10
+                    },
+                    {
+                        "name": "$tenantLinks",
+                        "in": "query",
+                        "description": "Comma-separated list",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceDocumentQueryResult"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Onboarding Deployments"
+                ],
+                "description": "Creates an onboarding deployment.",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/OnboardingDeploymentRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/OnboardingDeploymentResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/relocation/onboarding/deployment/{id}": {
+            "get": {
+                "tags": [
+                    "Onboarding Deployments"
+                ],
+                "description": "Gets the selected onboarding deployment.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/OnboardingDeploymentResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Onboarding Deployments"
+                ],
+                "description": "Deletes the selected onboarding deployment.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceErrorResponse"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Onboarding Deployments"
+                ],
+                "description": "Updates the selected onboarding deployment.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceErrorResponse"
+                        }
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        },
+        "/relocation/onboarding/task/create-deployment": {
+            "post": {
+                "tags": [
+                    "Onboarding Deployments"
+                ],
+                "description": "Creates or updates an onboarding deployment and associated resources.",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateDeploymentRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/relocation/onboarding/task/create-deployment-bulk": {
+            "post": {
+                "tags": [
+                    "Onboarding Deployments"
+                ],
+                "description": "Creates or updates onboarding deployments in bulk.",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BulkCreateDeploymentRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/relocation/onboarding/resource": {
+            "get": {
+                "tags": [
+                    "Onboarding Resources"
+                ],
+                "description": "Queries for onboarding resources.",
+                "parameters": [
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand document contents",
+                        "required": false,
+                        "type": "boolean",
+                        "default": false
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "OData filter expression",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Comma-separated list of fields to populate in query result",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$limit",
+                        "in": "query",
+                        "description": "Set maximum number of documents to return in this query",
+                        "required": false,
+                        "type": "integer",
+                        "x-example": 10
+                    },
+                    {
+                        "name": "$tenantLinks",
+                        "in": "query",
+                        "description": "Comma-separated list",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceDocumentQueryResult"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Onboarding Resources"
+                ],
+                "description": "Create an onboarding resource.",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/OnboardingResourceRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/OnboardingResourceResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/relocation/onboarding/resource/{id}": {
+            "get": {
+                "tags": [
+                    "Onboarding Resources"
+                ],
+                "description": "Get the selected onboarding resource.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/OnboardingResourceResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Onboarding Resources"
+                ],
+                "description": "Deletes the selected onboarding resource.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceErrorResponse"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Onboarding Resources"
+                ],
+                "description": "Updates the selected onboarding resource.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceErrorResponse"
+                        }
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        },
+        "/relocation/onboarding/blueprint": {
+            "get": {
+                "tags": [
+                    "Onboarding Blueprints"
+                ],
+                "description": "Queries for onboarding blueprints.",
+                "parameters": [
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand document contents",
+                        "required": false,
+                        "type": "boolean",
+                        "default": false
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "OData filter expression",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Comma-separated list of fields to populate in query result",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$limit",
+                        "in": "query",
+                        "description": "Set maximum number of documents to return in this query",
+                        "required": false,
+                        "type": "integer",
+                        "x-example": 10
+                    },
+                    {
+                        "name": "$tenantLinks",
+                        "in": "query",
+                        "description": "Comma-separated list",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceDocumentQueryResult"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Onboarding Blueprints"
+                ],
+                "description": "Creates an onboarding blueprints.",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/OnboardingBlueprintRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/OnboardingBlueprintResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/relocation/onboarding/blueprint/{id}": {
+            "get": {
+                "tags": [
+                    "Onboarding Blueprints"
+                ],
+                "description": "Gets the selected onboarding blueprint.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/OnboardingBlueprintResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Onboarding Blueprints"
+                ],
+                "description": "Deletes the selected onboarding blueprint.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceErrorResponse"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Onboarding Blueprints"
+                ],
+                "description": "Updates the selected onboarding blueprint.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceErrorResponse"
+                        }
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        },
+        "/relocation/api/wo/execute-plan": {
+            "get": {
+                "tags": [
+                    "Onboarding Plan Execution"
+                ],
+                "description": "Queries for onboarding plan executions.",
+                "parameters": [
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "description": "Expand document contents",
+                        "required": false,
+                        "type": "boolean",
+                        "default": false
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "OData filter expression",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$select",
+                        "in": "query",
+                        "description": "Comma-separated list of fields to populate in query result",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$limit",
+                        "in": "query",
+                        "description": "Set maximum number of documents to return in this query",
+                        "required": false,
+                        "type": "integer",
+                        "x-example": 10
+                    },
+                    {
+                        "name": "$tenantLinks",
+                        "in": "query",
+                        "description": "Comma-separated list",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceDocumentQueryResult"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Onboarding Plan Execution"
+                ],
+                "description": "Executes the given onboarding plan.",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PlanExecutionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/PlanExecutionResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/relocation/api/wo/execute-plan/{id}": {
+            "get": {
+                "tags": [
+                    "Onboarding Plan Execution"
+                ],
+                "description": "Gets the selected onboarding plan execution.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/PlanExecutionResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Onboarding Plan Execution"
+                ],
+                "description": "Deletes the selected onboarding plan execution.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceErrorResponse"
+                        }
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        },
+        "/relocation/api/wo/query-unmanaged-machine": {
+            "post": {
+                "tags": [
+                    "Query for Discovered Machines"
+                ],
+                "description": "Queries for compute resources representing unmanaged machines from the Provisioning service inventory.",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UnmanagedMachineQueryServiceRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/relocation/api/wo/unregister-machine": {
+            "post": {
+                "tags": [
+                    "Unregister Machines"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UnregisterMachineRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/UnregisterMachineResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "apiKey": {
+            "type": "apiKey",
+            "name": "csp-auth-token",
+            "in": "header"
+        }
+    },
+    "definitions": {
+        "OnboardingPlanRequest": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Plan name."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Plan description."
+                },
+                "projectId": {
+                    "type": "string",
+                    "description": "Project identifier the plan will onboard machines to."
+                },
+                "endpointIds": {
+                    "type": "array",
+                    "description": "Cloud account identifiers to lookup for discovered machines.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "OnboardingPlanResponse": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Plan name."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Plan description."
+                },
+                "projectId": {
+                    "type": "string",
+                    "description": "Project identifier the plan will onboard machines to."
+                },
+                "endpointIds": {
+                    "type": "array",
+                    "description": "Cloud account identifiers to lookup for discovered machines.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "tenantLink": {
+                    "type": "string",
+                    "description": "Link to the plan's tenant."
+                },
+                "documentSelfLink": {
+                    "type": "string",
+                    "description": "Link to this plan."
+                }
+            }
+        },
+        "OnboardingDeploymentRequest": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Deployment name. Will be propagated to Cloud Assembly deployment."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Deployment description. Will be propagated to Cloud Assembly deployment."
+                },
+                "planLink": {
+                    "type": "string",
+                    "description": "Link to the parent plan."
+                }
+            }
+        },
+        "OnboardingDeploymentResponse": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Deployment name. Will be propagated to Cloud Assembly deployment."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Deployment description. Will be propagated to Cloud Assembly deployment."
+                },
+                "planLink": {
+                    "type": "string",
+                    "description": "Link to the parent plan."
+                },
+                "consumerDeploymentLink": {
+                    "type": "string",
+                    "description": "Link to the onboarded deployment in Cloud Assembly."
+                },
+                "tenantLink": {
+                    "type": "string",
+                    "description": "Link to the deployment's tenant."
+                },
+                "documentSelfLink": {
+                    "type": "string",
+                    "description": "Link to this deployment."
+                }
+            }
+        },
+        "OnboardingResourceRequest": {
+            "properties": {
+                "resourceLink": {
+                    "type": "string",
+                    "description": "Link to the compute resource (machine) in the Provisioning service inventory."
+                },
+                "resourceName": {
+                    "type": "string",
+                    "description": "Resource name, usually the machine name. Will be propagated to Cloud Assembly."
+                },
+                "tagLinks": {
+                    "type": "array",
+                    "description": "Tag links in the Provisioning service inventory associated with the machine.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "deploymentLink": {
+                    "type": "string",
+                    "description": "Link to the parent deployment."
+                },
+                "planLink": {
+                    "type": "string",
+                    "description": "Link to the parent plan."
+                }
+            }
+        },
+        "OnboardingResourceResponse": {
+            "properties": {
+                "resourceLink": {
+                    "type": "string",
+                    "description": "Link to the compute resource (machine) in the Provisioning service inventory."
+                },
+                "resourceName": {
+                    "type": "string",
+                    "description": "Resource name, usually the machine name. Will be propagated to Cloud Assembly."
+                },
+                "tagLinks": {
+                    "type": "array",
+                    "description": "Tag links in the Provisioning service inventory associated with the machine.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "deploymentLink": {
+                    "type": "string",
+                    "description": "Link to the parent deployment."
+                },
+                "planLink": {
+                    "type": "string",
+                    "description": "Link to the parent plan."
+                },
+                "tenantLink": {
+                    "type": "string",
+                    "description": "Link to the resource's tenant."
+                },
+                "documentSelfLink": {
+                    "type": "string",
+                    "description": "Link to this resource."
+                }
+            }
+        },
+        "OnboardingBlueprintRequest": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the auto-generated Cloud Template."
+                },
+                "autoGenerate": {
+                    "type": "boolean",
+                    "description": "Automatically generate the Cloud Template if set."
+                },
+                "templateLink": {
+                    "type": "string",
+                    "description": "Link to an existing Cloud Template."
+                },
+                "deploymentLink": {
+                    "type": "string",
+                    "description": "Link to the parent deployment."
+                },
+                "planLink": {
+                    "type": "string",
+                    "description": "Link to the parent plan."
+                }
+            }
+        },
+        "OnboardingBlueprintResponse": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the auto-generated Cloud Template."
+                },
+                "autoGenerate": {
+                    "type": "boolean",
+                    "description": "Automatically generate the Cloud Template if set."
+                },
+                "templateLink": {
+                    "type": "string",
+                    "description": "Link to an existing Cloud Template."
+                },
+                "deploymentLink": {
+                    "type": "string",
+                    "description": "Link to the parent deployment."
+                },
+                "planLink": {
+                    "type": "string",
+                    "description": "Link to the parent plan."
+                },
+                "tenantLink": {
+                    "type": "string",
+                    "description": "Link to blueprint's tenant."
+                },
+                "documentSelfLink": {
+                    "type": "string",
+                    "description": "Link to this blueprint."
+                }
+            }
+        },
+        "PlanExecutionRequest": {
+            "properties": {
+                "planLink": {
+                    "type": "string",
+                    "description": "Link to the plan to execute."
+                }
+            }
+        },
+        "PlanExecutionResponse": {
+            "properties": {
+                "failureMessage": {
+                    "type": "string"
+                },
+                "planLink": {
+                    "type": "string"
+                },
+                "taskInfo": {
+                    "$ref": "#/definitions/TaskState"
+                },
+                "tenantLink": {
+                    "type": "string",
+                    "description": "Link to a tenant"
+                },
+                "documentSelfLink": {
+                    "type": "string"
+                }
+            }
+        },
+        "ResourceFieldFilter": {
+            "properties": {
+                "field": {
+                    "type": "string",
+                    "enum": [
+                        "ID",
+                        "NAME",
+                        "STATUS",
+                        "REGION",
+                        "ADDRESS",
+                        "TAG",
+                        "ANY"
+                    ]
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "CreateDeploymentRequest": {
+            "properties": {
+                "planLink": {
+                    "type": "string",
+                    "description": "Link to a plan. Clients need not set this field, as it is automatically taken care of by the DeploymentBulkCreatorService"
+                },
+                "deploymentLink": {
+                    "type": "string",
+                    "description": "Link to an existing deployment. Only set this field when adding resources to an existing deployment."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Desired deployment name. If omitted, a name will be automatically generated"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Deployment description"
+                },
+                "resources": {
+                    "type": "array",
+                    "description": "List of resources to be created",
+                    "items": {
+                        "$ref": "#/definitions/CreateResourceRequest"
+                    }
+                },
+                "createBlueprint": {
+                    "type": "boolean",
+                    "description": "Indicates whether onboarding should generate a Cloud Template for this deployment."
+                }
+            }
+        },
+        "CreateResourceRequest": {
+            "properties": {
+                "link": {
+                    "type": "string",
+                    "description": "Link to the compute resource (machine) in the Provisioning service inventory."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Resource name, usually the machine name. Will be propagated to Cloud Assembly."
+                },
+                "tagLinks": {
+                    "type": "array",
+                    "description": "Tag links in the Provisioning service inventory associated with the machine.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "BulkCreateDeploymentRequest": {
+            "properties": {
+                "planLink": {
+                    "type": "string",
+                    "description": "A link to the parent plan to associate the new onboarding deployments with."
+                },
+                "deployments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CreateDeploymentRequest"
+                    }
+                }
+            }
+        },
+        "AboutResponse": {
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "description": "Relocation service version."
+                },
+                "gitCommitId": {
+                    "type": "string",
+                    "description": "Relocation service commit identifier."
+                },
+                "xenonVersion": {
+                    "type": "string",
+                    "description": "Xenon-Spring version."
+                }
+            }
+        },
+        "UnmanagedMachineQueryServiceRequest": {
+            "properties": {
+                "planLink": {
+                    "type": "string"
+                },
+                "optionExcludePlanMachines": {
+                    "type": "boolean"
+                },
+                "optionIncludeOnlyPlanMachines": {
+                    "type": "boolean"
+                },
+                "filters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResourceFieldFilter"
+                    }
+                },
+                "expandFields": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "nextPageLink": {
+                    "type": "string"
+                },
+                "pageResultLimit": {
+                    "type": "integer"
+                }
+            }
+        },
+        "ServiceDocumentQueryResult": {
+            "properties": {
+                "documentCount": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "documentLinks": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "documents": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "nextPageLink": {
+                    "type": "string"
+                },
+                "nextPageLinksPerGroup": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "prevPageLink": {
+                    "type": "string"
+                },
+                "selectedDocuments": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "selectedLinks": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "selectedLinksPerDocument": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "ServiceErrorResponse": {
+            "properties": {
+                "details": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "SHOULD_RETRY"
+                        ]
+                    }
+                },
+                "message": {
+                    "type": "string"
+                },
+                "messageId": {
+                    "type": "string"
+                },
+                "statusCode": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "TaskState": {
+            "properties": {
+                "durationMicros": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "failure": {
+                    "$ref": "#/definitions/ServiceErrorResponse"
+                },
+                "isDirect": {
+                    "type": "boolean"
+                },
+                "stage": {
+                    "type": "string",
+                    "enum": [
+                        "CREATED",
+                        "STARTED",
+                        "FINISHED",
+                        "FAILED",
+                        "CANCELLED"
+                    ]
+                }
+            }
+        },
+        "UnregisterMachineRequest": {
+            "properties": {
+                "resourceLink": {
+                    "type": "string",
+                    "description": "A link to the onboarded machine to unregister from Cloud Assembly."
+                }
+            }
+        },
+        "UnregisterMachineResponse": {
+            "properties": {
+                "resourceLink": {
+                    "type": "string",
+                    "description": "A link to the unregistered machine."
+                }
+            }
+        }
+    }
+}
